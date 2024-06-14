@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:PatientBook.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PatientBook.Views.PatientsView"
+			 x:DataType="vm:PatientsViewModel">
+	<DockPanel>
+		<Grid Background="#F5F5F5">
+			<Grid Grid.Row="0" ColumnDefinitions="* 5* *"  Margin="20" VerticalAlignment="Top">
+				<Button Grid.Column="0" HorizontalAlignment="Left" Width="50" Background="#B5F36D" x:CompileBindings="False" Command="{Binding $parent[Window].DataContext.SavePatient}">
+					<TextBlock TextAlignment="Center">
+						Save
+					</TextBlock>
+				</Button>
+				<Button Grid.Column="1" HorizontalAlignment="Right" Width="100" Background="#FF7373" x:CompileBindings="False" Command="{Binding $parent[Window].DataContext.DeletePatient}">
+					<TextBlock TextAlignment="Center">
+						Delete
+					</TextBlock>
+				</Button>
+				<Button Grid.Column="2" HorizontalAlignment="Right" Width="100" Background="#BD63D4" x:CompileBindings="False" Command="{Binding $parent[Window].DataContext.AddPatient}">
+					<TextBlock TextAlignment="Center">
+						Add
+					</TextBlock>
+				</Button>
+			</Grid>
+			<Grid Grid.Row="1" Background="White" Margin="25,70,25,15">
+				<ScrollViewer>
+					<ItemsControl ItemsSource="{Binding ListItems}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<Grid ColumnDefinitions="2*, *, *, *">
+									<TextBlock Height="30" Grid.Column="0" Text="{Binding FullName}"/>
+									<TextBlock Height="30" Grid.Column="1" Text="{Binding Birthday}"/>
+									<TextBlock Height="30" Grid.Column="2" Text="{Binding GenderName}"/>
+									<CheckBox Grid.Column="3" IsChecked="{Binding IsDelete}"/>
+									
+								</Grid>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</ScrollViewer>
+			</Grid>
+		</Grid>
+	</DockPanel>
+</UserControl>
